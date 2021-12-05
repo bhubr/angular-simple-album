@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
 <app-header
-  [title]="'Angular Album'"
-  [subtitle]="'Apprendre les bases'"
-></app-header>
-<app-album></app-album>
-<app-footer></app-footer>
+  [title]="'Application Album'"
+  [subtitle]="subtitleValue"
+>
+</app-header>
+
+<!-- Ici, on va afficher un composant différent,
+en fonction du chemin (URL) où on se trouve -->
+<router-outlet></router-outlet>
+
+<app-footer
+  [label]="footerLabel"
+></app-footer>

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-simple-album';
+  subtitleValue = 'Rappels Angular';
+  footerLabel = '2021 World Company';
 }
