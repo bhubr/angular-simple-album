@@ -15,10 +15,10 @@
 
       <div class="column-3">
         <article class="card">
-          <img src="https://via.placeholder.com/480x320?text=image" alt="Alt text" />
+          <img [src]="post2.picture" alt="Alt text" />
           <div class="card-body">
-            <h3>Title</h3>
-            <p>This is a description.</p>
+            <h3>{{ post2.title }}</h3>
+            <p>{{ post2.description }}</p>
             <p class="likes">0 <i class="far fa-heart"></i></p>
           </div>
         </article>
