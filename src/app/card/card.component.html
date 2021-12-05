@@ -1,1 +1,8 @@
-<p>card works!</p>
+<article class="card">
+  <img [src]="post.picture" [alt]="post.title" />
+  <div class="card-body">
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.description }}</p>
+    <p class="likes">0 <i class="far fa-heart"></i></p>
+  </div>
+</article>
