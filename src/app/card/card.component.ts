@@ -23,4 +23,8 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  like() {
+    this.likes += 1;
+  }
+
 }
