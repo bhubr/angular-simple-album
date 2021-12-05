@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent implements OnInit {
-  post1 = {
-    picture: 'https://unsplash.com/photos/JH0wCegJsrQ/download?force=true&w=640',
-    title: 'La nuit',
-    description: "C'est beau une ville la nuit !"
-  };
+  posts = [
+      {
+      picture: 'https://unsplash.com/photos/JH0wCegJsrQ/download?force=true&w=640',
+      title: 'La nuit',
+      description: "C'est beau une ville la nuit !"
+    }
+  ];
   post2 = {
     picture: 'https://unsplash.com/photos/1kf69eE7VR4/download?force=true&w=640',
     title: 'San Francisco',
