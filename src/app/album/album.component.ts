@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { POSTS } from '../posts';
+import { Post } from '../types';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-album',
@@ -7,10 +8,12 @@ import { POSTS } from '../posts';
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent implements OnInit {
-  posts = POSTS
-  constructor() { }
+  posts: Post[] = [];
+  
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
+    this.posts = this.postService.getAllPosts();
   }
 
 }
