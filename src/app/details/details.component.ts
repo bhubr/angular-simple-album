@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { POSTS } from '../posts';
 import { Post } from '../types';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-details',
@@ -16,13 +17,13 @@ export class DetailsComponent implements OnInit {
     // concept qu'on retrouve dans beaucoup de frameworks
     // orientés objet appelé "injection de dépendances"
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private postService: PostService
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.post = POSTS.find(item => id === item.id);
-    console.log(this.post);
+    this.post = this.postService.getPost(id);
   }
 
 }

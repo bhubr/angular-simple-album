@@ -13,7 +13,10 @@ export class AlbumComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.posts = this.postService.getAllPosts();
+    this.postService.getAllPosts()
+      .then(posts => {
+        this.posts = posts;
+      });
   }
 
 }
