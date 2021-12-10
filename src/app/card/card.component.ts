@@ -16,9 +16,15 @@ class Post {
 export class CardComponent implements OnInit {
   @Input() post!: Post;
 
+  likes = 0;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  like() {
+    this.likes += 1;
   }
 
 }
