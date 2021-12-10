@@ -1,12 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-// La classe permet de décrire les attributs
-// de l'objet `post` passé depuis le parent
-class Post {
-  title!: string;
-  description!: string;
-  picture!: string;
-}
+import { Post } from '../types';
 
 @Component({
   selector: 'app-card',

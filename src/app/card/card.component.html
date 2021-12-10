@@ -3,7 +3,7 @@
   <div class="card-body">
     <h3>{{ post.title }}</h3>
     <p>{{ post.description }}</p>
-    <a routerLink="/details">En savoir plus</a>
+    <a [routerLink]="['/details', post.id]">En savoir plus</a>
     <p class="likes">{{ likes }} <i class="far fa-heart" (click)="like()"></i></p>
   </div>
 </article>
