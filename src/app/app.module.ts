@@ -8,6 +8,8 @@ import { AlbumComponent } from './album/album.component';
 import { FooterComponent } from './footer/footer.component';
 import { CardComponent } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
     HeaderComponent,
     AlbumComponent,
     FooterComponent,
-    CardComponent
+    CardComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
