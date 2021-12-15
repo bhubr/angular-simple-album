@@ -8,7 +8,7 @@
   width: 100%;
   border-top-left-radius: .25em;
   border-top-right-radius: .25em;
-  max-height: 280px;
+  height: 280px;
   object-fit: cover;
 }
 .card-body {

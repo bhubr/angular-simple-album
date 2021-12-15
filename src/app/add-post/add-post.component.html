@@ -27,6 +27,16 @@
             <input id="picture" type="text" formControlName="picture">
           </div>
         
+          <div>
+            <label for="tags">
+              Tags
+            </label>
+            <input id="tags" type="text" formControlName="tags">
+          </div>
+
+          <ul class="tags">
+            <li *ngFor="let tag of splitTags">{{ tag }}</li>
+          </ul>
         
           <button class="button" type="submit">Add</button>
         

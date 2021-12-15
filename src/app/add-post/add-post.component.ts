@@ -12,6 +12,7 @@ export class AddPostComponent implements OnInit {
     title: '',
     description: '',
     picture: '',
+    tags: ''
   });
 
   constructor(
@@ -24,5 +25,9 @@ export class AddPostComponent implements OnInit {
   onSubmit() {
     this.postService.addPost(this.addPostForm.value)
     .then(console.log);
+  }
+
+  get splitTags(): string[] {
+    return this.addPostForm.value.tags.split(',').filter((t: string) => !!t);
   }
 }
