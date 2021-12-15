@@ -1,0 +1,31 @@
+.form-wrapper {
+  border: 1px solid #eee;
+  margin: 1em 0;
+  padding: 2em;
+  width: 100%;
+}
+
+label, input {
+  display: block;
+  width: 50%; 
+}
+
+label {
+  margin-bottom: .25em;
+}
+
+input {
+  border: 1px solid #eee;
+  padding: .5em .75em;
+  border-radius: 3px;
+  margin-bottom: .75em;
+}
+
+button {
+  font-size: 100%;
+  border: 1px solid #55c;
+  background: #55c;
+  color: #eee;
+  padding: .25em .75em;
+  border-radius: 3px;
+}

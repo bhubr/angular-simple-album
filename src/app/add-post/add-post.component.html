@@ -1,0 +1,39 @@
+<main>
+  <div class="container">
+    <div class="grid">
+
+      <div class="form-wrapper">
+      
+        <form [formGroup]="addPostForm" (ngSubmit)="onSubmit()">
+  
+          <div>
+            <label for="title">
+              Title
+            </label>
+            <input id="title" type="text" formControlName="title">
+          </div>
+        
+          <div>
+            <label for="description">
+              Description
+            </label>
+            <input id="description" type="text" formControlName="description">
+          </div>
+        
+          <div>
+            <label for="picture">
+              Picture
+            </label>
+            <input id="picture" type="text" formControlName="picture">
+          </div>
+        
+        
+          <button class="button" type="submit">Add</button>
+        
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</main>
