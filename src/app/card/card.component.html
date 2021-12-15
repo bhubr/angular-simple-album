@@ -3,6 +3,9 @@
   <div class="card-body">
     <h3>{{ post.title }}</h3>
     <p>{{ post.description }}</p>
+    <ul class="card-tags">
+      <li class="card-tag" *ngFor="let tag of post.tags">{{ tag.title }}</li>
+    </ul>
     <a routerLink="/details/{{post.id}}">En savoir plus</a>
     <p class="icons">
       <i class="fa fa-trash" (click)="delete()"></i>

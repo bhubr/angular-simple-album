@@ -25,8 +25,12 @@ export class PostService {
       .toPromise();
   }
 
-  getPost(id: number): Post | undefined {
-    return POSTS.find(item => id === item.id);
+  getPost(id: number): Promise<Post> {
+    return this.http
+      .get<Post>(
+        `${this.serverUrl}${this.postsPath}/${id}`
+      )
+      .toPromise();
   }
 
   addPost(post: Partial<Post>) {

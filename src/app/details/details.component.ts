@@ -23,7 +23,10 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.post = this.postService.getPost(id);
+    this.postService.getPost(id)
+      .then(post => {
+        this.post = post;
+      });
   }
 
 }

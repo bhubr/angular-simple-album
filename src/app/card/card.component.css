@@ -24,3 +24,18 @@
 .card-body .likes .fa-heart {
   color: #c34;
 }
+
+.card-tags {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-tag {
+  padding: .125em .5em;
+  border: 1px solid #ddd;
+  background: #ddd;
+  border-radius: 12px;
+  list-style-type: none;
+  margin-right: 5px;
+}
