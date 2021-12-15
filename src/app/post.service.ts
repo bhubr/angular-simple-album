@@ -34,5 +34,11 @@ export class PostService {
       .post(`${this.serverUrl}${this.postsPath}`, post)
       .toPromise();
   }
+
+  deletePost(postId: number) {
+    return this.http
+      .delete(`${this.serverUrl}${this.postsPath}/${postId}`)
+      .toPromise();
+  }
   
 }

@@ -4,6 +4,9 @@
     <h3>{{ post.title }}</h3>
     <p>{{ post.description }}</p>
     <a routerLink="/details/{{post.id}}">En savoir plus</a>
-    <p class="likes">{{ likes }} <i class="far fa-heart" (click)="like()"></i></p>
+    <p class="icons">
+      <i class="fa fa-trash" (click)="delete()"></i>
+      <span class="likes">{{ likes }} <i class="far fa-heart" (click)="like()"></i></span>
+    </p>
   </div>
 </article>
