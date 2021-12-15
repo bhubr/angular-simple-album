@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostService {
   // URL absolue
-  serverUrl = 'https://my-json-server.typicode.com';
+  serverUrl = 'https://album-api.benoithubert.me';
   // chemin relatif sur le serveur
   postsPath = '/bhubr/album-api/posts';
 
