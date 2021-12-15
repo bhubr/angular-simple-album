@@ -5,9 +5,11 @@
   border-bottom-right-radius: .25em;
 }
 .card img {
-  max-width: 100%;
+  width: 100%;
   border-top-left-radius: .25em;
   border-top-right-radius: .25em;
+  max-height: 240px;
+  object-fit: cover;
 }
 .card-body {
   padding: .5em 1em;
