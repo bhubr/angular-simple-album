@@ -9,7 +9,7 @@
     <a routerLink="/details/{{post.id}}">En savoir plus</a>
     <p class="icons">
       <i class="fa fa-trash" (click)="delete()"></i>
-      <span class="likes">{{ likes }} <i class="far fa-heart" (click)="like()"></i></span>
+      <span class="likes">{{ post.likes }} <i class="far fa-heart" (click)="like()"></i></span>
     </p>
   </div>
 </article>

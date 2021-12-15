@@ -9,5 +9,7 @@ export interface Post {
   title: string;
   description: string;
   picture: string;
+  createdAt: string;
+  likes: number;
   tags: Tag[];
 }

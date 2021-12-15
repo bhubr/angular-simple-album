@@ -39,6 +39,12 @@ export class PostService {
       .toPromise();
   }
 
+  likePost(postId: number) {
+    return this.http
+      .put(`${this.serverUrl}${this.postsPath}/${postId}/like`, {})
+      .toPromise();
+  }
+
   deletePost(postId: number) {
     return this.http
       .delete(`${this.serverUrl}${this.postsPath}/${postId}`)

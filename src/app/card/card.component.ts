@@ -10,12 +10,10 @@ import { Post } from '../types';
 export class CardComponent implements OnInit {
   @Input() post!: Post;
 
-  likes = 0;
-
   constructor(private postService: PostService) { }
 
   like() {
-    this.likes += 1;
+    this.postService.likePost(this.post.id);
   }
 
   delete() {
