@@ -8,9 +8,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostService {
   // URL absolue
-  serverUrl = 'https://album-api.benoithubert.me';
+  // serverUrl = 'https://album-api.benoithubert.me';
+  serverUrl = 'http://localhost:5200';
   // chemin relatif sur le serveur
-  postsPath = '/bhubr/album-api/posts';
+  postsPath = '/api/posts';
 
   constructor(
     private http: HttpClient
