@@ -17,7 +17,11 @@ export class AuthenticationService {
   loginPath = '/api/v2/auth/login';
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User | null>(null);
+    const storedUserJSON = localStorage.getItem('currentUser');
+    const storedUser = storedUserJSON ? JSON.parse(storedUserJSON) : null;
+    this.currentUserSubject = new BehaviorSubject<User | null>(
+      storedUser
+    );
   }
 
   public get currentUserValue(): User | null {
@@ -54,5 +58,7 @@ export class AuthenticationService {
 
   logout() {
     this.currentUserSubject.next(null);
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
   }
 }
