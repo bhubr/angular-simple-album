@@ -9,7 +9,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup | undefined;
+  registerForm: FormGroup;
   loading = false;
   submitted = false;
   error = '';
@@ -20,6 +20,10 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
 ) {
+    this.registerForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+  });
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
         this.router.navigate(['/']);
@@ -27,10 +31,18 @@ export class RegisterComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-  });
+  }
+
+  onSubmit() {
+    // en JavaScript pré-ES6
+    // const username = this.registerForm.value.username;
+    // const password = this.registerForm.value.password;
+
+    const { username, password } = this.registerForm.value;
+    this.authenticationService.register(username, password)
+      .subscribe(() => {
+        this.router.navigate(['/login']);
+      });
   }
 
 }
