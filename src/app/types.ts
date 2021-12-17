@@ -14,11 +14,17 @@ export interface Post {
   tags: Tag[];
 }
 
-export interface TokenPayload {
-  token: string;
-}
-
 export interface CredentialsPayload {
   login: string;
   pwd: string;
+}
+
+export interface User {
+  id: number;
+  login: string;
+}
+
+export interface TokenPayload {
+  token: string;
+  user: User;
 }
