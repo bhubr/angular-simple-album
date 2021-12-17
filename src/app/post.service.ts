@@ -21,4 +21,12 @@ export class PostService {
       )
       .toPromise();
   }
+
+  getPost(postId: number): Promise<Post> {
+    return this.http
+      .get<Post>(
+        `${this.serverUrl}${this.postsPath}/${postId}`
+      )
+      .toPromise();
+  }
 }
