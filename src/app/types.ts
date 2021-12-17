@@ -4,3 +4,8 @@ export class Post {
   description!: string;
   picture!: string;
 }
+
+export class User {
+  id!: number;
+  login!: string;
+}
