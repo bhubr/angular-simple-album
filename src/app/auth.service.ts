@@ -12,11 +12,17 @@ export class AuthService {
 
   private basePath = '/api/v2/auth';
 
-  private token = '';
+  private token;
 
   public currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {
+    this.token = localStorage.getItem('token') || '';
+    const storedUserJSON = localStorage.getItem('user');
+    if (storedUserJSON) {
+      const user = JSON.parse(storedUserJSON);
+      this.currentUserSubject.next(user);
+    }
   }
 
   private endpoint(path: string) {
@@ -40,6 +46,8 @@ export class AuthService {
       .toPromise()
       .then(data => {
         this.token = data.token;
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', this.token);
         this.currentUserSubject.next(data.user);
         this.router.navigate(['']);
         return data;
