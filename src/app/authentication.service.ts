@@ -8,8 +8,7 @@ import { User, TokenUserPayload } from './types';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
+  public currentUserSubject: BehaviorSubject<User | null>;
 
     // URL absolue
     serverUrl = 'https://album-api.benoithubert.me';
@@ -19,7 +18,6 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(null);
-    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): User | null {
@@ -42,6 +40,9 @@ export class AuthenticationService {
       localStorage.setItem('token', payload.token);
       localStorage.setItem('currentUser', JSON.stringify(payload.user));
 
+      // On dit au currentUserSubject d'émettre commme valeur
+      // l'objet représentant l'user (id et login)
+      console.log('currentUserSubject emits value:', payload.user);
       this.currentUserSubject.next(payload.user);
       return payload;
   }));

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
+import { User } from '../types';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  // Valeur qui va être modifiée par la suite,
+  // via le subscriber du currentUserSubject
+  public currentUser: User | null = null;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    console.log(this.authenticationService.currentUserValue);
+
+    this.authenticationService.currentUserSubject.subscribe((user: User | null) => {
+      console.log('currentUserSubject subscriber receives value:', user);
+      this.currentUser = user;
+    })
   }
 
 }

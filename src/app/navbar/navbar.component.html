@@ -5,8 +5,13 @@
       <li><a routerLink="/about">About</a></li>
       <li><a routerLink="/contact">Contact</a></li>
       <li><a routerLink="/add-post">Add post</a></li>
-      <li><a routerLink="/register">Register</a></li>
-      <li><a routerLink="/login">Login</a></li>
+      <!--
+        Affichage conditionnel des liens, seulement
+        si on n'est pas connecté
+      -->
+      <li><a routerLink="/register" *ngIf="!currentUser">Register</a></li>
+      <li><a routerLink="/login" *ngIf="!currentUser">Login</a></li>
+      <li><button type="button" *ngIf="currentUser">{{ currentUser.login }} (Logout)</button></li>
     </ul>
   </div>
 </nav>
