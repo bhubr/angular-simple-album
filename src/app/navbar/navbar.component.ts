@@ -20,7 +20,11 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.currentUserSubject.subscribe((user: User | null) => {
       console.log('currentUserSubject subscriber receives value:', user);
       this.currentUser = user;
-    })
+    });
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 
 }
