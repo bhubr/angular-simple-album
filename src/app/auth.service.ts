@@ -16,7 +16,7 @@ export class AuthService {
 
   public currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token') || '';
     const storedUserJSON = localStorage.getItem('user');
     if (storedUserJSON) {
@@ -49,7 +49,6 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', this.token);
         this.currentUserSubject.next(data.user);
-        this.router.navigate(['']);
         return data;
       });
   }
