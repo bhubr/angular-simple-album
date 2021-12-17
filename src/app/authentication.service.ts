@@ -10,6 +10,8 @@ import { User, TokenUserPayload } from './types';
 export class AuthenticationService {
   public currentUserSubject: BehaviorSubject<User | null>;
 
+  public token: string = localStorage.getItem('token') || '';
+
   // URL absolue
   serverUrl = 'https://album-api.benoithubert.me';
   // chemin relatif sur le serveur
@@ -51,6 +53,7 @@ export class AuthenticationService {
           // l'objet représentant l'user (id et login)
           console.log('currentUserSubject emits value:', payload.user);
           this.currentUserSubject.next(payload.user);
+          this.token = payload.token;
           return payload;
         })
       );
