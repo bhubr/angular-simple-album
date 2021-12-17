@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Post } from './types';
-import { POSTS } from './posts';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
@@ -12,9 +11,7 @@ export class PostService {
   // serverUrl = 'https://album-api.benoithubert.me';
   serverUrl = 'http://localhost:5200';
   // chemin relatif sur le serveur
-  postsPath = '/api/posts';
-  // chemin relatif sur le serveur
-  postsProtectedPath = '/api/v2/posts';
+  postsPath = '/api/v2/posts';
 
   constructor(
     private http: HttpClient,
@@ -47,7 +44,7 @@ export class PostService {
 
   addPost(post: Partial<Post>) {
     return this.http
-      .post(`${this.serverUrl}${this.postsProtectedPath}`, post, {
+      .post(`${this.serverUrl}${this.postsPath}`, post, {
         headers: this.getHeaders()
       })
       .toPromise();
