@@ -1,0 +1,36 @@
+.auth-form {
+  margin: 2em 0;
+}
+
+label, input {
+  display: block;
+}
+
+label {
+  margin-bottom: .25em;
+}
+
+input {
+  padding: .5em;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: .5em;
+}
+
+button {
+  font-size: 100%;
+  background: #55c;
+  border: 1px solid #55c;
+  border-radius: 4px;
+  color: #fff;
+  padding: .25em .75em;
+}
+
+.button-wrapper {
+  display: flex;
+}
+
+.alert {
+  padding: .5em 1em;
+  border: 2px solid red;
+}

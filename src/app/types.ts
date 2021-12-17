@@ -13,3 +13,12 @@ export interface Post {
   likes: number;
   tags: Tag[];
 }
+
+export interface TokenPayload {
+  token: string;
+}
+
+export interface CredentialsPayload {
+  login: string;
+  pwd: string;
+}

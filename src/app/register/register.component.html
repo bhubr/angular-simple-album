@@ -1,0 +1,19 @@
+<div class="container auth-form">
+
+  <div class="alert" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+
+    <label for="login">Email</label>
+    <input id="login" name="login" formControlName="login" placeholder="Email" type="text" />
+
+    <label for="pwd">Password</label>
+    <input id="pwd" name="pwd" formControlName="pwd" placeholder="Password" type="password" />
+
+    <div class="button-wrapper">
+      <button type="submit" [disabled]="loading">Register</button>
+      <div class="lds-roller" *ngIf="loading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </form>
+
+</div>
