@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CredentialsPayload, TokenPayload, User } from './types';
 
@@ -15,7 +16,7 @@ export class AuthService {
 
   public currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   private endpoint(path: string) {
@@ -40,6 +41,7 @@ export class AuthService {
       .then(data => {
         this.token = data.token;
         this.currentUserSubject.next(data.user);
+        this.router.navigate(['']);
         return data;
       });
   }
