@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from './types';
+import { map } from 'rxjs/operators';
+import { User, TokenUserPayload } from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthenticationService {
     serverUrl = 'https://album-api.benoithubert.me';
     // chemin relatif sur le serveur
     registerPath = '/api/v2/auth/register';
+    loginPath = '/api/v2/auth/login';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -29,5 +31,19 @@ export class AuthenticationService {
       `${this.serverUrl}${this.registerPath}`,
       { login, pwd }
     );
+  }
+
+  public login(login: string, pwd: string): Observable<TokenUserPayload> {
+    return this.http.post<TokenUserPayload>(
+      `${this.serverUrl}${this.loginPath}`,
+      { login, pwd }
+    ).pipe(map((payload: TokenUserPayload) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('token', payload.token);
+      localStorage.setItem('currentUser', JSON.stringify(payload.user));
+
+      this.currentUserSubject.next(payload.user);
+      return payload;
+  }));
   }
 }
