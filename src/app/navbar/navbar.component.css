@@ -20,3 +20,20 @@ nav ul li a {
 nav ul li a:hover {
   text-decoration: underline;
 }
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav button {
+  background: transparent;
+  border: none;
+  color: #eee;
+  font-size: 100%;
+  padding: .75em 1em;
+  cursor: pointer;
+}
+nav button:hover {
+  text-decoration: underline;
+}
