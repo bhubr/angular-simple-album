@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PostService } from '../post.service';
 import { Post } from '../types';
 
 @Component({
@@ -11,13 +12,19 @@ export class CardComponent implements OnInit {
 
   likes = 0;
 
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
   }
 
   like() {
     this.likes += 1;
+  }
+
+  delete() {
+    this.postService.deletePost(this.post.id)
+      .then(() => console.log('post deleted'))
+      .catch((err: Error) => console.error('error while deleting', err))
   }
 
 }
