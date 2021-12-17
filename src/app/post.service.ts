@@ -29,4 +29,13 @@ export class PostService {
       )
       .toPromise();
   }
+
+  createPost(postData: Partial<Post>): Promise<Post> {
+    return this.http
+      .post<Post>(
+        `${this.serverUrl}${this.postsPath}`,
+        postData,
+      )
+      .toPromise();
+  }
 }

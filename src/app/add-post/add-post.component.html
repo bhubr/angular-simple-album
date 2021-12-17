@@ -1,0 +1,19 @@
+<main>
+  <div class="container">
+    <h3>Add a post</h3>
+    <form [formGroup]="postForm" (ngSubmit)="addPost()">
+
+      <label for="title">Title</label>
+      <input id="title" name="title" formControlName="title" placeholder="Title" type="text" />
+
+      <label for="description">Description</label>
+      <input id="description" name="description" formControlName="description" placeholder="Description" type="text" />
+
+      <label for="picture">Picture</label>
+      <input id="picture" name="picture" formControlName="picture" placeholder="Picture" type="text" />
+
+      <button type="submit">Create</button>
+    </form>
+
+  </div>
+</main>

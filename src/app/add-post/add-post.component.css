@@ -1,0 +1,15 @@
+form {
+  margin: 1em 0;
+}
+
+label, input {
+  display: block;
+}
+
+label {
+  margin-bottom: .25em;
+}
+
+input {
+  margin-bottom: .75em;
+}
