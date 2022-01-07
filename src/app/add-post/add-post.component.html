@@ -13,6 +13,8 @@
       <input id="picture" name="picture" formControlName="picture" placeholder="Picture" type="text" />
 
       <button type="submit">Create</button>
+
+      <div *ngIf="error">{{ error }}</div>
     </form>
 
   </div>

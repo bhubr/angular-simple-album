@@ -17,6 +17,7 @@ export class AddPostComponent implements OnInit {
       picture: '',
     })
   }
+  error = '';
 
   ngOnInit(): void {
   }
@@ -26,12 +27,14 @@ export class AddPostComponent implements OnInit {
     // console.log et console.error sont juste temporaires
     // idéalement, on afficherait une notification de succès
     this.postService.createPost(postData)
-      .then(post => {
+    .subscribe({
+      next: post => {
         console.log(`post created with id ${post.id}`);
-      })
-      .catch(err => {
-        console.error('Could not create post', err);
-      })
+      },
+      error: error => {
+        this.error = error;
+      }
+    });
   }
 
 }
