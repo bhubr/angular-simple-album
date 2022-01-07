@@ -12,6 +12,8 @@ export class CardComponent implements OnInit {
 
   likes = 0;
 
+  error = '';
+
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
@@ -23,8 +25,12 @@ export class CardComponent implements OnInit {
 
   delete() {
     this.postService.deletePost(this.post.id)
-      .then(() => console.log('post deleted'))
-      .catch((err: Error) => console.error('error while deleting', err))
+    .subscribe({
+      next: () => console.log('post deleted'),
+      error: (error) => {
+        this.error = error;
+      }
+    })
   }
 
 }

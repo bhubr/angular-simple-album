@@ -8,5 +8,6 @@
       <i class="fa fa-trash" (click)="delete()"></i>
       <span class="likes">{{ likes }} <i class="far fa-heart" (click)="like()"></i></span>
     </p>
+    <div *ngIf="error">{{ error }}</div>
   </div>
 </article>

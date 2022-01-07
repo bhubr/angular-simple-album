@@ -42,8 +42,14 @@ export class PostService {
       // et rediriger l'utilisateur vers le login
       this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } })
     // erreurs dûes à des données incorrectes envoyées (par le serveur renvoie une 400 Bad Request)
-    } else {
+    } else if(error.status === 403) {
+      errorMessage = 'You are not the owner of this post';
+    } else if (error.status === 404) {
+      errorMessage = 'This post does not exist anymore.';
+    } else if (error.status === 400) {
       errorMessage = 'There are missing or misformated fields.';
+    } else {
+      errorMessage = 'An unexpected error occurred.';
     }
     return throwError(errorMessage);
   }
@@ -76,11 +82,14 @@ export class PostService {
       );
   }
 
-  deletePost(postId: number): Promise<{}> {
+  deletePost(postId: number): Observable<{}> {
     return this.http
       .delete<{}>(
         `${this.serverUrl}${this.postsPath}/${postId}`,
+        { headers: this.getHeaders() }
       )
-      .toPromise();
+      .pipe(
+        catchError(error => this.handleError(error))
+      );
   }
 }
