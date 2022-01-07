@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { User, TokenUserPayload } from './types';
 
 @Injectable({
@@ -30,11 +30,33 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  /**
+   * Error handler
+   * @param error error response
+   * @returns 
+   */
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = 'A network error occurred. Please come back later';
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+     errorMessage = 'You provided incorrect values. Username should be a valid email and password should have 5 characters';
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(errorMessage);
+  }
+
   public register(login: string, pwd: string): Observable<{}> {
     return this.http.post<{}>(`${this.serverUrl}${this.registerPath}`, {
       login,
       pwd,
-    });
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   public login(login: string, pwd: string): Observable<TokenUserPayload> {
