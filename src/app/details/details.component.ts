@@ -18,8 +18,14 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.postService.getPost(id).then((post) => {
-      this.post = post;
+    this.postService.getPost(id).subscribe({
+      next: (post: Post) => {
+        this.post = post;
+      },
+      error: (error: string) => {
+        // TODO: ajouter un attribut error et lui assigner error, et l'afficher
+        console.error(error);
+      }
     });
   }
 }
