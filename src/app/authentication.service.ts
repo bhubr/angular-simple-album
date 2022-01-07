@@ -43,7 +43,10 @@ export class AuthenticationService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-     errorMessage = 'You provided incorrect values. Username should be a valid email and password should have 5 characters';
+      const errorMessages = error.error.errors.map(
+        (item: { msg: string }) => item.msg
+      )
+     errorMessage = errorMessages.join('. ');
     }
     // Return an observable with a user-facing error message.
     return throwError(errorMessage);
