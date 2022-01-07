@@ -69,6 +69,7 @@ export class AuthenticationService {
         pwd,
       })
       .pipe(
+        catchError(this.handleError),
         map((payload: TokenUserPayload) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('token', payload.token);
