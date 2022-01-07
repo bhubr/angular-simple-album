@@ -8,13 +8,14 @@ import { DetailsComponent } from './details/details.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: AlbumComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'details/:id', component: DetailsComponent },
-  { path: 'add-post', component: AddPostComponent },
+  { path: 'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
 ];

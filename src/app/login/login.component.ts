@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
 ) {
@@ -41,8 +41,9 @@ export class LoginComponent implements OnInit {
 
     const { username, password } = this.loginForm.value;
     this.authenticationService.login(username, password)
-      .subscribe((value: any) => {
-        console.log(value);
+      .subscribe(() => {
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
       });
   }
 
