@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,8 @@ import { DetailsComponent } from './details/details.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+
+import { NoopInterceptor } from './noop.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
