@@ -51,7 +51,6 @@ export class AuthenticationService {
 
           // On dit au currentUserSubject d'émettre commme valeur
           // l'objet représentant l'user (id et login)
-          console.log('currentUserSubject emits value:', payload.user);
           this.currentUserSubject.next(payload.user);
           this.token = payload.token;
           return payload;
@@ -61,6 +60,7 @@ export class AuthenticationService {
 
   logout() {
     this.currentUserSubject.next(null);
+    this.token = '';
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
   }
