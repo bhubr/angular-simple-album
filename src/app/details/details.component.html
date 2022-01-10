@@ -8,5 +8,12 @@
         <p>{{ post.description }}</p>
       </div>
     </article>
+
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <textarea formControlName="text">
+      </textarea>
+
+      <button type="submit">Comment</button>
+    </form>
   </div>
 </main>

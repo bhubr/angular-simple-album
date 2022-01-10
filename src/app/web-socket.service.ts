@@ -20,8 +20,12 @@ export class WebSocketService {
 
     this.subject.subscribe(
       ({ type, ...rest }: Message) => {
+        console.log(type, rest);
         if (type === 'post:like') {
           this.notifSubject.next(`${rest.user.login} liked your post ${rest.post.title}`)
+        }
+        if (type === 'post:comment') {
+          this.notifSubject.next(`${rest.user.email} commented your post ${rest.post.title}`)
         }
       }
     );

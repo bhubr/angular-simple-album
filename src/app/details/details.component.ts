@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../types';
@@ -11,10 +12,17 @@ import { Post } from '../types';
 export class DetailsComponent implements OnInit {
   post?: Post;
 
+  commentForm: FormGroup;
+
   constructor(
     private postService: PostService,
+    private fb: FormBuilder,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.commentForm = this.fb.group({
+      text: ''
+    });
+  }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -27,5 +35,11 @@ export class DetailsComponent implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  onSubmit() {
+    const comment = this.commentForm.value
+    this.postService.comment(this.post!.id, comment)
+      .subscribe(val => console.log(val))
   }
 }

@@ -108,4 +108,16 @@ export class PostService {
         catchError(error => this.handleError(error))
       );
   }
+
+  comment(postId: number, comment: { text: string }): Observable<{}> {
+    return this.http
+      .post<{}>(
+        `${this.serverUrl}${this.postsPath}/${postId}/comments`,
+        comment,
+        { headers: this.getHeaders() }
+      )
+      .pipe(
+        catchError(error => this.handleError(error))
+      );
+  }
 }
