@@ -41,7 +41,7 @@ import { NoopInterceptor } from './noop.interceptor';
     AppRoutingModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -20,7 +20,9 @@ export class CardComponent implements OnInit {
   }
 
   like() {
-    this.likes += 1;
+    // this.likes += 1;
+    this.postService.likePost(this.post.id)
+    .subscribe((value) => console.log(value))
   }
 
   delete() {

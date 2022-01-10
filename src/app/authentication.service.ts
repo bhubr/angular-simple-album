@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User, TokenUserPayload } from './types';
+import { WebSocketService } from './web-socket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,18 @@ export class AuthenticationService {
   public token: string = localStorage.getItem('token') || '';
 
   // URL absolue
-  serverUrl = 'https://album-api.benoithubert.me';
+  // serverUrl = 'https://album-api.benoithubert.me';
+  serverUrl = 'http://localhost:5200';
   // chemin relatif sur le serveur
   registerPath = '/api/v2/auth/register';
   loginPath = '/api/v2/auth/login';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ws: WebSocketService) {
     const storedUserJSON = localStorage.getItem('currentUser');
     const storedUser = storedUserJSON ? JSON.parse(storedUserJSON) : null;
+    if (this.token) {
+      this.wsConnect(this.token);
+    }
     this.currentUserSubject = new BehaviorSubject<User | null>(
       storedUser
     );
@@ -28,6 +33,11 @@ export class AuthenticationService {
 
   public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  public wsConnect(token: string) {
+    this.ws.connect();
+    this.ws.sendMessage({ type: 'connect', token });
   }
 
   /**
@@ -74,6 +84,7 @@ export class AuthenticationService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('token', payload.token);
           localStorage.setItem('currentUser', JSON.stringify(payload.user));
+          this.wsConnect(payload.token);
 
           // On dit au currentUserSubject d'émettre commme valeur
           // l'objet représentant l'user (id et login)

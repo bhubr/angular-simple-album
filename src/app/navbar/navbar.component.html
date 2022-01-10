@@ -16,6 +16,15 @@
           {{ currentUser.login }} (Logout)
         </button>
       </li>
+      <li>
+        <label for="notifications">Notifications ({{ notifications.length }})</label>
+        <input id="notifications" type="checkbox" />
+        <ul class="notifications">
+          <li *ngFor="let notif of notifications">
+            {{ notif }}
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>

@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class PostService {
   // URL absolue
-  serverUrl = 'https://album-api.benoithubert.me';
+  // serverUrl = 'https://album-api.benoithubert.me';
+  serverUrl = 'http://localhost:5200';
   // chemin relatif sur le serveur
   postsPath = '/api/v2/posts';
 
@@ -26,6 +27,7 @@ export class PostService {
   }
 
   private getHeaders() {
+    console.log(this.authenticationService.currentUserValue, this.authenticationService.token)
     return this.authenticationService.token
       ? new HttpHeaders({ Authorization: `Bearer ${this.authenticationService.token}` })
       : new HttpHeaders();
@@ -88,6 +90,18 @@ export class PostService {
     return this.http
       .delete<{}>(
         `${this.serverUrl}${this.postsPath}/${postId}`,
+        { headers: this.getHeaders() }
+      )
+      .pipe(
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  likePost(postId: number): Observable<{}> {
+    return this.http
+      .put<{}>(
+        `${this.serverUrl}${this.postsPath}/${postId}/like`,
+        {},
         { headers: this.getHeaders() }
       )
       .pipe(
