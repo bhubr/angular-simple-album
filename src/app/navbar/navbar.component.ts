@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
-import { User } from '../types';
+import { User, Notification } from '../types';
 import { WebSocketService } from '../web-socket.service';
 
 @Component({
@@ -27,6 +27,12 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.currentUserSubject.subscribe((user: User | null) => {
       console.log('currentUserSubject subscriber receives value:', user);
       this.currentUser = user;
+      this.ws.getNotifications()
+        .subscribe(notifications => {
+          this.notifications = notifications.map((not: Notification) => (
+            `notif ${not.id} ${not.type}`
+          ));
+        })
     });
   }
 

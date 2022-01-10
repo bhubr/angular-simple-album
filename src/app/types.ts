@@ -17,3 +17,14 @@ export interface TokenUserPayload {
   token: string;
   user: User;
 }
+
+export enum NotificationType {
+  LIKE = "like",
+  COMMENT = "comment"
+};
+
+export interface Notification {
+  id: number;
+  user: User;
+  type: NotificationType;
+}

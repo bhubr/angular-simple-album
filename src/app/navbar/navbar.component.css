@@ -6,7 +6,9 @@ nav {
 nav ul {
   padding: 0;
   margin: 0;
-  display: flex;
+}
+nav ul.flex {
+    display: flex;
 }
 nav ul li {
   list-style-type: none;
@@ -23,8 +25,18 @@ nav ul li a:hover {
 #notifications {
   display: none;
 }
+.notifications-wrapper {
+  position: relative;
+}
 ul.notifications {
+  position: absolute;
   display: none;
+  background: #333;
+  width: 200px;
+}
+ul.notifications li {
+  border-bottom: 1px solid #444;
+  padding: .5em;
 }
 input#notifications:is(:checked) + ul.notifications {
   display: block;

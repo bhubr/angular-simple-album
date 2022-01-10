@@ -1,6 +1,6 @@
 <nav>
   <div class="container">
-    <ul>
+    <ul class="flex">
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/about">About</a></li>
       <li><a routerLink="/contact">Contact</a></li>
@@ -16,7 +16,7 @@
           {{ currentUser.login }} (Logout)
         </button>
       </li>
-      <li>
+      <li class="notifications-wrapper">
         <label for="notifications">Notifications ({{ notifications.length }})</label>
         <input id="notifications" type="checkbox" />
         <ul class="notifications">

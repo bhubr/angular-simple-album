@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { webSocket } from "rxjs/webSocket";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { webSocket } from 'rxjs/webSocket';
+import { AuthenticationService } from './authentication.service';
+import { Notification } from './types';
 
 interface Message {
   type: string;
@@ -14,6 +17,18 @@ export class WebSocketService {
   public subject?: Subject<Message>;
 
   public notifSubject: Subject<string> = new Subject();
+
+  serverUrl = 'http://localhost:5200';
+  notifPath = '/api/v2/notifications';
+
+  constructor(private http: HttpClient) {}
+
+  private getHeaders() {
+    const token = localStorage.getItem('token') || '';
+    return token
+      ? new HttpHeaders({ Authorization: `Bearer ${token}` })
+      : new HttpHeaders();
+  }
 
   connect() {
     this.subject = webSocket("ws://localhost:5200");
@@ -33,5 +48,12 @@ export class WebSocketService {
   
   sendMessage(msg: Message) {
     this.subject!.next(msg);
+  }
+
+  getNotifications(): Observable<Notification[]> {
+    return this.http.get<Notification[]>(
+      `${this.serverUrl}${this.notifPath}`,
+      { headers: this.getHeaders() }
+    )
   }
 }
