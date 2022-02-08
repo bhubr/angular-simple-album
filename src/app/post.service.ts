@@ -25,19 +25,13 @@ export class PostService {
     // this.handleError = this.handleError.bind(this);
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse | string) {
+    if (typeof error === 'string') {
+      return throwError(error);
+    }
     let errorMessage = '';
     if (error.status === 0) {
       errorMessage = 'A network error occurred. Please come back later';
-    } else if (error.status === 401) {
-      errorMessage = 'You have been disconnected. Please login again';
-      // ici on pourrait appeler logout sur authenticationService
-      this.authenticationService.logout();
-      // et rediriger l'utilisateur vers le login
-      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } })
-    // erreurs dûes à des données incorrectes envoyées (par le serveur renvoie une 400 Bad Request)
-    } else if(error.status === 403) {
-      errorMessage = 'You are not the owner of this post';
     } else if (error.status === 404) {
       errorMessage = 'This post does not exist anymore.';
     } else if (error.status === 400) {
