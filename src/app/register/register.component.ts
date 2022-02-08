@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         error: (error) => {
           // gérer l'erreur ici
           this.error = error;
-        }
+        },
       });
   }
 

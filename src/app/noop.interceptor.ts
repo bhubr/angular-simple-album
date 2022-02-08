@@ -14,6 +14,10 @@ export class NoopInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log('passing in NoopInterceptor', request.url);
-    return next.handle(request);
+    // Ajoute un header "bidon"
+    const modifiedReq = request.clone({
+      headers: request.headers.set('X-Noop-Header', 'noop')
+    });
+    return next.handle(modifiedReq);
   }
 }
