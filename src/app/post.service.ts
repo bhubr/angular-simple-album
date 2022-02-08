@@ -26,18 +26,23 @@ export class PostService {
   }
 
   private handleError(error: HttpErrorResponse | string) {
+    // TODO: trouver une façon plus élégante
     if (typeof error === 'string') {
       return throwError(error);
     }
     let errorMessage = '';
-    if (error.status === 0) {
-      errorMessage = 'A network error occurred. Please come back later';
-    } else if (error.status === 404) {
-      errorMessage = 'This post does not exist anymore.';
-    } else if (error.status === 400) {
-      errorMessage = 'There are missing or misformated fields.';
-    } else {
-      errorMessage = 'An unexpected error occurred.';
+    switch (error.status) {
+      case 0:
+        errorMessage = 'A network error occurred. Please come back later';
+        break;
+      case 400:
+        errorMessage = 'There are missing or misformated fields.';
+        break;
+      case 404:
+        errorMessage = 'This post does not exist anymore.';
+        break;
+      default:
+        errorMessage = 'An unexpected error occurred.';
     }
     return throwError(errorMessage);
   }

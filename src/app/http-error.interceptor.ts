@@ -21,19 +21,22 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
-    if (error.status === 0) {
-      errorMessage = 'A network error occurred. Please come back later';
-    } else if (error.status === 401) {
-      errorMessage = 'You have been disconnected. Please login again';
-      // ici on pourrait appeler logout sur authenticationService
-      this.authenticationService.logout();
-      // et rediriger l'utilisateur vers le login
-      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } })
-    // erreurs dûes à des données incorrectes envoyées (par le serveur renvoie une 400 Bad Request)
-    } else if(error.status === 403) {
-      errorMessage = 'You are not allowed to do this';
-    } else {
-      errorMessage = 'An unexpected error occurred.';
+    switch (error.status) {
+      case 0:
+        errorMessage = 'A network error occurred. Please come back later';
+        break;
+      case 401:
+        errorMessage = 'You have been disconnected. Please login again';
+        // ici on pourrait appeler logout sur authenticationService
+        this.authenticationService.logout();
+        // et rediriger l'utilisateur vers le login
+        this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } })
+        break;
+      case 403:
+        errorMessage = 'You are not allowed to do this';
+        break;
+      default:
+        return throwError(error);
     }
     return throwError(errorMessage);
   }
