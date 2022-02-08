@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
 import { NoopInterceptor } from './noop.interceptor';
+import { JwtInterceptor } from './jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NoopInterceptor } from './noop.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

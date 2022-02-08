@@ -25,12 +25,6 @@ export class PostService {
     // this.handleError = this.handleError.bind(this);
   }
 
-  private getHeaders() {
-    return this.authenticationService.token
-      ? new HttpHeaders({ Authorization: `Bearer ${this.authenticationService.token}` })
-      : new HttpHeaders();
-  }
-
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.status === 0) {
@@ -77,7 +71,6 @@ export class PostService {
       .post<Post>(
         `${this.serverUrl}${this.postsPath}`,
         postData,
-        { headers: this.getHeaders() }
       )
       .pipe(
         catchError(error => this.handleError(error))
@@ -88,7 +81,6 @@ export class PostService {
     return this.http
       .delete<{}>(
         `${this.serverUrl}${this.postsPath}/${postId}`,
-        { headers: this.getHeaders() }
       )
       .pipe(
         catchError(error => this.handleError(error))
