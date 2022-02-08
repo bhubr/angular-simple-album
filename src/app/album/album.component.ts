@@ -15,7 +15,7 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getAllPosts()
-      .then(posts => {
+      .subscribe(posts => {
         this.posts = posts;
       });
   }

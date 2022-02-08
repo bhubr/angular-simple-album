@@ -47,12 +47,11 @@ export class PostService {
     return throwError(errorMessage);
   }
 
-  getAllPosts(): Promise<Post[]> {
+  getAllPosts(): Observable<Post[]> {
     return this.http
       .get<Post[]>(
         `${this.serverUrl}${this.postsPath}`
-      )
-      .toPromise();
+      );
   }
 
   getPost(postId: number): Observable<Post> {
