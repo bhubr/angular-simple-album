@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../types';
 
@@ -8,7 +8,15 @@ import { Post } from '../types';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
+  /**
+   * post passé depuis le composant parent
+   */
   @Input() post!: Post;
+
+  /**
+   * event emitter pour transmettre le post màj au composant parent
+   */
+  @Output() postUpdatedEvent = new EventEmitter<Post>();
 
   error = '';
 
@@ -18,11 +26,10 @@ export class CardComponent implements OnInit {
   }
 
   like() {
-    console.log('post likes before ->', this.post.likes);
     this.postService.likePost(this.post.id)
       .subscribe({
         next: (updatedPost: Post) => {
-          console.log('post updated -> ', updatedPost.likes)
+          this.postUpdatedEvent.emit(updatedPost);
         },
         error: (error) => {
           this.error = error;
