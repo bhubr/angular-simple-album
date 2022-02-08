@@ -85,4 +85,15 @@ export class PostService {
         catchError(error => this.handleError(error))
       );
   }
+
+  likePost(postId: number): Observable<Post> {
+    return this.http
+      .put<Post>(
+        `${this.serverUrl}${this.postsPath}/${postId}/like`,
+        {}
+      )
+      .pipe(
+        catchError(error => this.handleError(error))
+      );
+  }
 }

@@ -3,6 +3,7 @@ export class Post {
   title!: string;
   description!: string;
   picture!: string;
+  likes!: number;
 }
 
 export class User {

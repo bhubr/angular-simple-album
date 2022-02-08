@@ -10,8 +10,6 @@ import { Post } from '../types';
 export class CardComponent implements OnInit {
   @Input() post!: Post;
 
-  likes = 0;
-
   error = '';
 
   constructor(private postService: PostService) { }
@@ -20,7 +18,16 @@ export class CardComponent implements OnInit {
   }
 
   like() {
-    this.likes += 1;
+    console.log('post likes before ->', this.post.likes);
+    this.postService.likePost(this.post.id)
+      .subscribe({
+        next: (updatedPost: Post) => {
+          console.log('post updated -> ', updatedPost.likes)
+        },
+        error: (error) => {
+          this.error = error;
+        }
+      })
   }
 
   delete() {
