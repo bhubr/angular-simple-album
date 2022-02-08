@@ -3,7 +3,11 @@
     <div class="grid">
 
       <div class="column-3" *ngFor="let post of posts">
-        <app-card [post]="post" (postUpdatedEvent)="updatePost($event)"></app-card>
+        <app-card
+          [post]="post"
+          (postUpdatedEvent)="updatePost($event)"
+          (postDeletedEvent)="deletePost($event)"
+        ></app-card>
       </div>
 
     </div>

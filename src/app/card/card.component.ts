@@ -18,6 +18,13 @@ export class CardComponent implements OnInit {
    */
   @Output() postUpdatedEvent = new EventEmitter<Post>();
 
+  /**
+   * event emitter pour transmettre l'id du post effacé au parent.
+   * On n'a PAS BESOIN de transmettre tout le post effacé : le parent
+   * a juste besoin de connaître son id. D'où le typage avec number.
+   */
+  @Output() postDeletedEvent = new EventEmitter<number>();
+
   error = '';
 
   constructor(private postService: PostService) { }
@@ -40,7 +47,9 @@ export class CardComponent implements OnInit {
   delete() {
     this.postService.deletePost(this.post.id)
     .subscribe({
-      next: () => console.log('post deleted'),
+      next: () => {
+        this.postDeletedEvent.emit(this.post.id);
+      },
       error: (error) => {
         this.error = error;
       }

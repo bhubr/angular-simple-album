@@ -39,4 +39,17 @@ export class AlbumComponent implements OnInit {
     // this.posts.splice(updatedPostIndex, 1, updatedPost);
   }
 
+  deletePost(deletedPostId: number) {
+    console.log('id of post to delete', deletedPostId);
+
+    this.posts = this.posts.filter(
+      post => post.id !== deletedPostId
+    );
+
+    // const deletedPostIndex = this.posts.findIndex(
+    //   post => post.id === deletedPostId
+    // );
+    // this.posts.splice(deletedPostIndex, 1);
+  }
+
 }

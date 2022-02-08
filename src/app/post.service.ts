@@ -75,9 +75,9 @@ export class PostService {
       );
   }
 
-  deletePost(postId: number): Observable<{}> {
+  deletePost(postId: number): Observable<void> {
     return this.http
-      .delete<{}>(
+      .delete<void>(
         `${this.serverUrl}${this.postsPath}/${postId}`,
       )
       .pipe(
